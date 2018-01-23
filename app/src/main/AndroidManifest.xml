@@ -12,20 +12,52 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="Baby Casket"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
 
         <activity
             android:name="com.sourcey.materiallogindemo.MainActivity"
             android:label="Baby Casket" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.sourcey.materiallogindemo.LoginActivity" android:theme="@style/AppTheme.Dark" />
-        <activity android:name="com.sourcey.materiallogindemo.SignupActivity" android:theme="@style/AppTheme.Dark" />
-        <activity android:name="com.sourcey.materiallogindemo.CustomizeActivity" android:theme="@style/AppTheme.Dark"/>
+
+        <activity android:name=".LoginActivity"
+            android:label="Login">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name="com.sourcey.materiallogindemo.AboutActivity"
+            android:theme="@style/AppTheme.Dark"
+            android:label="About Us">
+        </activity>
+
+        <activity android:name="com.sourcey.materiallogindemo.SignupActivity"
+            android:theme="@style/AppTheme.Dark"
+            android:label="Signup"/>
+
+        <activity android:name="com.sourcey.materiallogindemo.CustomizeActivity"
+            android:theme="@style/AppTheme.Dark"
+            android:label="Customize Settting"/>
+        <activity android:name="com.sourcey.materiallogindemo.Family"
+            android:theme="@style/AppTheme.Dark"
+            />
+        <activity android:name="com.sourcey.materiallogindemo.HarmfulObject"
+            android:theme="@style/AppTheme.Dark"/>
+        <activity android:name="com.sourcey.materiallogindemo.Object"
+            android:theme="@style/AppTheme.Dark"/>
+        <activity android:name="com.sourcey.materiallogindemo.AddTaskActivity"
+            android:theme="@style/AppTheme.Dark"/>
+
+        <provider
+            android:name="com.sourcey.materiallogindemo.utility.TaskContentProvider"
+            android:authorities="com.sourcey.materiallogindemo"
+            android:exported="false"/>
+
     </application>
 
 </manifest>

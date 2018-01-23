@@ -19,6 +19,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.amazonaws.mobile.client.AWSMobileClient;
+import com.amazonaws.mobileconnectors.pinpoint.PinpointConfiguration;
+import com.amazonaws.mobileconnectors.pinpoint.PinpointManager;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
@@ -37,11 +41,26 @@ import javax.net.ssl.HttpsURLConnection;
 
 
 public class MainActivity extends AppCompatActivity {
+    public static PinpointManager pinpointManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
+        AWSMobileClient.getInstance().initialize(this).execute();
+        PinpointConfiguration pinpointConfig = new PinpointConfiguration(
+                getApplicationContext(),
+                AWSMobileClient.getInstance().getCredentialsProvider(),
+                AWSMobileClient.getInstance().getConfiguration());
+
+        pinpointManager = new PinpointManager(pinpointConfig);
+
+        // Start a session with Pinpoint
+        pinpointManager.getSessionClient().startSession();
+
+        // Stop the session and submit the default app started event
+        pinpointManager.getSessionClient().stopSession();
+        pinpointManager.getAnalyticsClient().submitEvents();
 
 
         Intent intent = new Intent(this, LoginActivity.class);
@@ -68,9 +87,25 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
 
             return true;
+        } else if (id == R.id.action_about) {
+            Intent intent = new Intent(getApplicationContext(),AboutActivity.class);
+            startActivity(intent);
+
+            return true;
+        } else if(id == R.id.action_logout){
+            Intent loginscreen=new Intent(this,LoginActivity.class);
+            loginscreen.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(loginscreen);
+            this.finish();
+        }
+        else if (id == R.id.action_harmful) {
+            Intent intent = new Intent(getApplicationContext(), HarmfulObject.class);
+            startActivity(intent);
+
+            return true;
         }
 
-        return super.onOptionsItemSelected(item);
+            return super.onOptionsItemSelected(item);
     }
 
 

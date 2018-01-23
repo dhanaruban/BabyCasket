@@ -3,6 +3,7 @@ package com.sourcey.materiallogindemo;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+
 import android.util.Log;
 
 import android.content.Intent;
@@ -11,6 +12,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.amazonaws.mobile.auth.ui.SignInUI;
+import com.amazonaws.mobile.client.AWSMobileClient;
+import com.amazonaws.mobile.client.AWSStartupHandler;
+import com.amazonaws.mobile.client.AWSStartupResult;
+import com.sourcey.materiallogindemo.utility.EventLog;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -27,6 +34,13 @@ public class LoginActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        AWSMobileClient.getInstance().initialize(this, new AWSStartupHandler() {
+            @Override
+            public void onComplete(AWSStartupResult awsStartupResult) {
+                SignInUI signin = (SignInUI) AWSMobileClient.getInstance().getClient(LoginActivity.this, SignInUI.class);
+                signin.login(LoginActivity.this, ToggleActivity.class).execute();
+            }
+        }).execute();
 
         emailText = (EditText) findViewById(R.id.input_email);
         passwordText =(EditText) findViewById(R.id.input_password);
@@ -53,6 +67,7 @@ public class LoginActivity extends AppCompatActivity {
                 overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
             }
         });
+        new EventLog().logEvent("LoginPage","UserLoginSuccess");
     }
 
     public void login() {

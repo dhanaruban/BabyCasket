@@ -3,5 +3,18 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Customize</string>
+    <string name="action_harmful">Harmful Object Profile</string>
+    <string name="action_about">About Us</string>
+    <string name="action_logout">Log out</string>
+    <string name="family_profile">FAMILY PROFILE</string>
+    <string name="edit_task_description">Person Relationship</string>
+    <string name="edit_task">Add Objects</string>
+    <string name="add_button">ADD</string>
+    <string-array name="family">
+        <item>Father</item>
+        <item>Mother</item>
+        <item>Guardian</item>
+
+    </string-array>
 
 </resources>

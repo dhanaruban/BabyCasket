@@ -10,7 +10,8 @@
         android:layout_height="wrap_content"
         android:paddingTop="56dp"
         android:paddingLeft="24dp"
-        android:paddingRight="24dp">
+        android:paddingRight="24dp"
+        android:background="@drawable/back">
 
         <ImageView android:src="@drawable/logo"
 
